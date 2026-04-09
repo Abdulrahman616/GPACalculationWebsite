@@ -22,3 +22,8 @@ body {
 .navbar a:hover {
     color: #240606;
 }
+
+.logo {
+    text-align: center;
+    margin: 20px 0;
+}
