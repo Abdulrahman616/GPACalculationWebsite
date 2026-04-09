@@ -195,3 +195,22 @@ table td {
     text-align: center;
     border: 1px solid #ccc;
 }
+
+article {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-left: 4px solid #f0a500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+article h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+article p {
+    color: #555;
+    line-height: 1.7;
+}
