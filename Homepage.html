@@ -36,7 +36,7 @@
     <div class="hero">
     <h1>Welcome to the GPA Calculation Website!</h1>
     <p>Your simple and easy tool to calculate your academic GPA</p>  <!--hero is a new Feature wasn't mention in the slides-->
-    <a href="#about-section" class="hero-btn">Learn More</a>
+    <a href="#about-section" class="hero-button">Learn More</a>
     </div>
 
     <section id="about-section">
@@ -108,6 +108,35 @@
     </table>
 </section>
 
+<section id="gpa-calculator">
+    <h2>GPA Calculator</h2>
+    <p>Enter your courses below to calculate your GPA.</p>
+
+    <table id="calculator-table">
+        <tr>
+            <th>Course Name</th>
+            <th>Hours</th>
+            <th>Grade (0 - 100)</th>
+        </tr>
+        <tr>
+            <td><input type="text" placeholder="CPIS358"></td>
+            <td><input type="number" value="3" min="1" max="6"></td>
+            <td><input type="number" placeholder="85" min="0" max="100"></td>
+        </tr>
+    </table>
+
+    <div class="calculator-buttons">
+        <button onclick="addRow()">+ Add Course</button>
+        <button onclick="calculateGPA()">Calculate GPA</button> <!--onclick is a new event, as it's name say it starts when the button is clicked-->
+        <button onclick="resetTable()">Reset</button>
+    </div>
+
+    <div id="gpa-result" style="display:none;" class="gpa-result">
+        <p>Total Credit Hours: <strong id="total-hours">0</strong></p>
+        <p>Your GPA: <strong id="gpa-value">0.00</strong></p>
+    </div>
+</section>
+
 <article id="how-it-works">
     <h2>How Does GPA Calculation Work?</h2>
 
@@ -122,7 +151,72 @@
     </p>
 
 </article>
+    <script>
+
     
+    function addRow() {
+        var table = document.getElementById("calculator-table");
+        var newRow = table.insertRow(-1);
+        newRow.innerHTML = `
+            <td><input type="text" placeholder="CPIS358"></td>               
+            <td><input type="number" value="3" min="1" max="6"></td>
+            <td><input type="number" placeholder="85" min="0" max="100"></td>`; <!--This artical was very Helpful for this part https://stackoverflow.com/questions/31665966/best-way-to-add-row-to-html-table-without-re-rendering-->
+    }
+
+    
+    function gradeToPoints(grade) {
+        if (grade >= 95) { return 5.0; }
+        else if (grade >= 90) { return 4.75; }
+        else if (grade >= 85) { return 4.5; }
+        else if (grade >= 80) { return 4.0; }
+        else if (grade >= 75) { return 3.5; }
+        else if (grade >= 70) { return 3.0; }
+        else if (grade >= 65) { return 2.5; }
+        else if (grade >= 60) { return 2.0; }
+        else { return 0.0; }
+    }
+
+    
+    function calculateGPA() {
+        var table = document.getElementById("calculator-table");
+        var totalHours = 0;
+        var totalPoints = 0;
+
+        for (var i = 1; i < table.rows.length; i++) {
+            var hours = parseFloat(table.rows[i].cells[1].querySelector("input").value);
+            var grade = parseFloat(table.rows[i].cells[2].querySelector("input").value);
+            totalHours = totalHours + hours;
+            totalPoints = totalPoints + (hours * gradeToPoints(grade));
+        }
+
+
+        var gpa = totalPoints / totalHours;
+
+
+        document.getElementById("total-hours").textContent = totalHours;
+        document.getElementById("gpa-value").textContent = gpa.toFixed(2); // https://www.w3schools.com/jsref/prop_node_textcontent.asp was the guidance here
+        document.getElementById("gpa-result").style.display = "block";
+    }
+
+
+    function resetTable() {
+        var table = document.getElementById("calculator-table");
+
+
+        while (table.rows.length > 2) {
+            table.deleteRow(-1);
+        }
+
+        table.rows[1].cells[0].querySelector("input").value = "";
+        table.rows[1].cells[1].querySelector("input").value = "3";
+        table.rows[1].cells[2].querySelector("input").value = "";
+
+
+
+        document.getElementById("gpa-result").style.display = "none";
+    }
+
+</script>
     </body>
 
 </html>
