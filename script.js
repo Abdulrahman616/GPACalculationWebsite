@@ -33,6 +33,17 @@ function calculateGPA() {
     for (var i = 1; i < table.rows.length; i++) {
         var hours = parseFloat(table.rows[i].cells[1].querySelector("input").value);
         var grade = parseFloat(table.rows[i].cells[2].querySelector("input").value);
+
+        if (hours < 1 || hours > 6) {
+            alert("Hours must be between 1 and 6");
+            return;
+        }
+        if (grade < 0 || grade > 100) {
+            alert("Grade must be between 0 and 100");
+            return;
+        }
+
+
         totalHours = totalHours + hours;
         totalPoints = totalPoints + (hours * gradeToPoints(grade, scale));   //using the selected scale to calculate the GPA
     }
