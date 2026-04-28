@@ -110,6 +110,17 @@
 
 <section id="gpa-calculator">
     <h2>GPA Calculator</h2>
+
+    <div style="margin-bottom: 15px;">
+
+    <label for="gpaScale">GPA Scale: </label>
+    <select id="gpaScale">
+    <option value="5">5.0 (default)</option>
+    <option value="4">4.0 </option>
+
+  </select>
+
+    </div>
     <p>Enter your courses below to calculate your GPA.</p>
 
     <table id="calculator-table">
@@ -151,6 +162,10 @@
     </p>
 
 </article>
+
+    <script src="script.js"></script>
+
+
     <script>
 
     
@@ -164,39 +179,7 @@
     }
 
     
-    function gradeToPoints(grade) {
-        if (grade >= 95) { return 5.0; }
-        else if (grade >= 90) { return 4.75; }
-        else if (grade >= 85) { return 4.5; }
-        else if (grade >= 80) { return 4.0; }
-        else if (grade >= 75) { return 3.5; }
-        else if (grade >= 70) { return 3.0; }
-        else if (grade >= 65) { return 2.5; }
-        else if (grade >= 60) { return 2.0; }
-        else { return 0.0; }
-    }
 
-    
-    function calculateGPA() {
-        var table = document.getElementById("calculator-table");
-        var totalHours = 0;
-        var totalPoints = 0;
-
-        for (var i = 1; i < table.rows.length; i++) {
-            var hours = parseFloat(table.rows[i].cells[1].querySelector("input").value);
-            var grade = parseFloat(table.rows[i].cells[2].querySelector("input").value);
-            totalHours = totalHours + hours;
-            totalPoints = totalPoints + (hours * gradeToPoints(grade));
-        }
-
-
-        var gpa = totalPoints / totalHours;
-
-
-        document.getElementById("total-hours").textContent = totalHours;
-        document.getElementById("gpa-value").textContent = gpa.toFixed(2); // https://www.w3schools.com/jsref/prop_node_textcontent.asp was the guidance here
-        document.getElementById("gpa-result").style.display = "block";
-    }
 
 
     function resetTable() {
