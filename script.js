@@ -22,7 +22,7 @@
   }
 }
 
-    
+
     function calculateGPA() {
         var scaleSelect = document.getElementById("gpaScale");      
         var scale = parseInt(scaleSelect.value);       // conventing the selected scale to a intger 
@@ -45,3 +45,22 @@
         document.getElementById("gpa-value").textContent = gpa.toFixed(2); // https://www.w3schools.com/jsref/prop_node_textcontent.asp was the guidance here
         document.getElementById("gpa-result").style.display = "block";
     }
+
+function toggleDarkMode() {
+    if (document.body.style.backgroundColor === "black") {
+
+        document.body.style.backgroundColor = "";
+        document.body.style.color = "";
+        document.querySelector("article").style.backgroundColor = ""; // https://stackoverflow.com/questions/54954942/how-to-revert-changes-to-css-made-by-javascript for more explanation 
+        document.querySelector("article").style.color = "";
+        document.getElementById("gpa-result").style.backgroundColor = "";
+        
+    } else {
+
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+        document.querySelector("article").style.backgroundColor = "#1a1a1a";
+        document.querySelector("article").style.color = "#f0f0f0";
+        document.getElementById("gpa-result").style.backgroundColor = "#1a1a1a";
+    }
+}
